@@ -14,11 +14,16 @@ jobs:
         with:
           python-version: '3.14'
 
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
       - name: Install pip requirements.txt
         run: pip install -r requirements.txt
 
       - name: Run Python
-        run: python bot.py
+        run: xvfb-run python bot.py
 
       - name: Save result
         run: |
