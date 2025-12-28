@@ -16,7 +16,10 @@ def get_title(soup: BeautifulSoup):
         output="result"
         )
 def scrape(driver: Driver, data):
-    driver.google_get(data)
+    driver.google_get(
+            data,
+            bypass_cloudflare=True
+            )
     driver.short_random_sleep()
 
     html = driver.page_html
