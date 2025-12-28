@@ -13,6 +13,7 @@ def get_title(soup: BeautifulSoup):
 @browser(
         parallel=2,
         max_retry=3,
+        output="result"
         )
 def scrape(driver: Driver, data):
     driver.google_get(data)
