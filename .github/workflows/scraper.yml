@@ -1,5 +1,10 @@
 name: Scraper
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      output_name:
+        description: "Output file name"
+        required: true
 jobs:
   scrape:
     runs-on: ubuntu-latest
@@ -23,7 +28,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Python
-        run: xvfb-run python bot.py
+        run: |
+          export SCRAPE_OUTPUT={{ github.event.inputs.output_name }}
+          xvfb-run python bot.py
 
       - name: Save result
         run: |

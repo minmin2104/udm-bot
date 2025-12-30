@@ -2,6 +2,11 @@ from botasaurus.browser import browser, Driver
 import json
 from bs4 import BeautifulSoup
 from botasaurus.soupify import soupify
+import os
+from datetime import datetime
+
+
+OUTPUT_NAME = os.getenv("SCRAPE_OUTPUT", datetime.utcnow().strftime("%Y%m%d_%H%M%S"))  # noqa
 
 
 def get_title(soup: BeautifulSoup):
@@ -13,7 +18,7 @@ def get_title(soup: BeautifulSoup):
 @browser(
         parallel=2,
         max_retry=3,
-        output="result"
+        output=OUTPUT_NAME
         )
 def scrape(driver: Driver, data):
     driver.google_get(
